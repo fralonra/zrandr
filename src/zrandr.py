@@ -15,8 +15,8 @@ class Zrandr(QWidget):
         w = str(current.get('width'))
         h = str(current.get('height'))
         self.current = w + 'x' + h
-        self.w_old, self.h_old = float(w), float(h) 
-
+        self.w_old, self.h_old = float(w), float(h)
+        
         arLayout = QHBoxLayout()
         self.box = QComboBox()
         box = self.box
@@ -24,16 +24,16 @@ class Zrandr(QWidget):
             box.addItem(i['width'] + 'x' + i['height'])
         arLayout.addWidget(QLabel('Available Resolutions : '))
         arLayout.addWidget(box)
-        
+
         btnLayout = QHBoxLayout()
         aplBtn = QPushButton('Apply')
-        btnLayout.addStretch()
+        rmBtn = QPushButton('Remove')
         btnLayout.addWidget(aplBtn)
-        btnLayout.addStretch()
+        btnLayout.addWidget(rmBtn)
 
         self.currentL = QLabel()
         self.showCurrent()
-
+        
         nrLayout = QHBoxLayout()
         newL = QLabel('New resolution : ')
         fix = QCheckBox('Fixed Scale')
@@ -46,7 +46,7 @@ class Zrandr(QWidget):
         nrLayout.addWidget(QLabel('x'))
         nrLayout.addWidget(self.height)
         nrLayout.addWidget(addBtn)
-        
+
         rtLayout = QHBoxLayout()
         rtL = QLabel('Rotations :')
         rt = QComboBox()
@@ -56,7 +56,7 @@ class Zrandr(QWidget):
         rtLayout.addWidget(rtL)
         rtLayout.addWidget(rt)
         rtLayout.addWidget(rtBtn)
-        
+
         brtLayout = QHBoxLayout()
         brtL = QLabel('Brightness :')
         brt = QSlider(Qt.Horizontal)
@@ -67,7 +67,7 @@ class Zrandr(QWidget):
         brt.setTickInterval(5)
         brtLayout.addWidget(brtL)
         brtLayout.addWidget(brt)
-        
+
         qLayout = QHBoxLayout()
         qBtn = QPushButton('Quit')
         qLayout.addStretch()
@@ -79,11 +79,12 @@ class Zrandr(QWidget):
         rtBtn.clicked.connect(lambda: self.rtResolution(rt.currentText()))
         brt.valueChanged.connect(lambda: self.bright(brt.value()))
         aplBtn.clicked.connect(self.setResolution)
+        rmBtn.clicked.connect(self.rmResolution)
         qBtn.clicked.connect(self.cancel)
 
+        layout.addWidget(self.currentL)
         layout.addLayout(arLayout)
         layout.addLayout(btnLayout)
-        layout.addWidget(self.currentL)
         layout.addLayout(nrLayout)
         layout.addLayout(rtLayout)
         layout.addLayout(brtLayout)
@@ -160,10 +161,10 @@ class Zrandr(QWidget):
             os.system('xrandr --newmode "' + add + '" ' + modeline)
             self.box.addItem(add)
 
-    def rtResolution(self,  rt):
+    def rtResolution(self, rt):
         os.system('xrandr --output ' + self.monitor + ' --rotate ' + rt)
-    
-    def bright(self,  brt):
+
+    def bright(self, brt):
         brt = str(brt / 100)
         os.system('xrandr --output ' + self.monitor + ' --brightness ' + brt)
 
@@ -181,7 +182,7 @@ class Zrandr(QWidget):
         keep = QPushButton('Yes')
         resume = QPushButton('No')
 
-        keep.clicked.connect(lambda: self.btnClicked('y')) 
+        keep.clicked.connect(lambda: self.btnClicked('y'))  # use lambda to pass arguments
         resume.clicked.connect(lambda: self.btnClicked('n'))
 
         hlayout = QHBoxLayout()
@@ -195,6 +196,16 @@ class Zrandr(QWidget):
 
         self.dialog.exec_()
 
+    def rmResolution(self):
+        msg = QMessageBox()
+        msg.setWindowTitle('Warning')
+        msg.setIcon(2)
+        msg.setInformativeText('Are you sure you want to remove mode ' + self.selectResolution())
+        msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        msg.buttonClicked.connect(lambda: self.btnClicked('rm'))
+
+        msg.exec_()
+
     def btnClicked(self, arg):
         if arg == 'y':
                 self.dialog.close()
@@ -203,6 +214,11 @@ class Zrandr(QWidget):
             self.current = self.old
             self.showCurrent()
             self.dialog.close()
+        elif arg == 'rm':
+            rm = self.selectResolution()
+            os.system('xrandr --delmode ' + self.monitor + ' ' + rm)
+            #os.system('xrandr --rmmode ' + rm)
+            self.box.removeItem(self.box.currentIndex())
 
     def cancel(self):
         sys.exit()
