@@ -182,7 +182,7 @@ class Zrandr(QWidget):
         keep = QPushButton('Yes')
         resume = QPushButton('No')
 
-        keep.clicked.connect(lambda: self.btnClicked('y'))  # use lambda to pass arguments
+        keep.clicked.connect(lambda: self.btnClicked('y'))
         resume.clicked.connect(lambda: self.btnClicked('n'))
 
         hlayout = QHBoxLayout()
