@@ -53,4 +53,3 @@ package() {
     install -Dm644 icons/${prog}.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/$prog.svg" 
   done 
 } 
-index on master: a5604b7 Initial commit
