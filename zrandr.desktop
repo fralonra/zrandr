@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Zrandr
+Comment=A front end for xrandr
+GenericName=Screen Settings
+Exec=zrandr
+Icon=zrandr
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Settings;HardwareSettings;
