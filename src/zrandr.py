@@ -1,4 +1,6 @@
-import sys, os, re
+import sys
+import os
+import re
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
@@ -17,6 +19,7 @@ class Zrandr(QWidget):
         self.current = w + 'x' + h
         self.w_old, self.h_old = float(w), float(h)
         
+        # Available Layouts
         arLayout = QHBoxLayout()
         self.box = QComboBox()
         box = self.box
@@ -25,15 +28,18 @@ class Zrandr(QWidget):
         arLayout.addWidget(QLabel('Available Resolutions : '))
         arLayout.addWidget(box)
 
+        # Buttons
         btnLayout = QHBoxLayout()
         aplBtn = QPushButton('Apply')
         rmBtn = QPushButton('Remove')
         btnLayout.addWidget(aplBtn)
         btnLayout.addWidget(rmBtn)
 
+        # Current Layout
         self.currentL = QLabel()
         self.showCurrent()
-        
+
+        # New Layout
         nrLayout = QHBoxLayout()
         newL = QLabel('New resolution : ')
         fix = QCheckBox('Fixed Scale')
@@ -47,6 +53,7 @@ class Zrandr(QWidget):
         nrLayout.addWidget(self.height)
         nrLayout.addWidget(addBtn)
 
+        # Rotations
         rtLayout = QHBoxLayout()
         rtL = QLabel('Rotations :')
         rt = QComboBox()
@@ -57,6 +64,7 @@ class Zrandr(QWidget):
         rtLayout.addWidget(rt)
         rtLayout.addWidget(rtBtn)
 
+        # Brightness
         brtLayout = QHBoxLayout()
         brtL = QLabel('Brightness :')
         brt = QSlider(Qt.Horizontal)
@@ -73,6 +81,7 @@ class Zrandr(QWidget):
         qLayout.addStretch()
         qLayout.addWidget(qBtn)
 
+        # Connect Slot
         box.currentIndexChanged.connect(self.selectResolution)
         fix.stateChanged.connect(lambda: self.fixScale(fix))
         addBtn.clicked.connect(self.addResolution)
@@ -147,6 +156,7 @@ class Zrandr(QWidget):
         w, h = self.width.text(), self.height.text()
         add = w + 'x' + h
 
+        # init modeline
         a = os.popen('cvt ' + w + ' ' + h).read()
         _list = a.splitlines()
         for i in _list:
@@ -217,7 +227,7 @@ class Zrandr(QWidget):
         elif arg == 'rm':
             rm = self.selectResolution()
             os.system('xrandr --delmode ' + self.monitor + ' ' + rm)
-            #os.system('xrandr --rmmode ' + rm)
+            os.system('xrandr --rmmode ' + rm)
             self.box.removeItem(self.box.currentIndex())
 
     def cancel(self):
