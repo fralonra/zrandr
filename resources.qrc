@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="icon">res/zrandr.png</file>
+    </qresource>
+</RCC>
