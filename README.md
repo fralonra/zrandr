@@ -8,8 +8,7 @@ Features include:
 * Changing screen brightness
 
 ## Dependencies
-* python  
-* pyqt
+* qt5
 * xrandr
 
 ## Installation
@@ -23,5 +22,3 @@ running 'install.sh' as root
 # install.sh
 ```
 
-## Bugs
-* Removing resolutions won't work
