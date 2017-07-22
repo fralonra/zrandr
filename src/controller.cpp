@@ -137,7 +137,7 @@ void Controller::initInfo()
                 if (line.contains("Brightness: ")) {
                     double brt = line.split("Brightness: ")[1].toDouble();
                     monitors.last()->setBrightness(brt);
-                } else if (line.contains(QRegularExpression("\\d{2}\\.\\d{2}Hz$"))) {
+                } else if (line.contains(QRegularExpression("\\d{2}\\.\\d{1,2}Hz$"))) {
                     QString hz = line.split(" ").last();
                     monitors.last()->resolutions()->last()->setHz(hz);
                 }

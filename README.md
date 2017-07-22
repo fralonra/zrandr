@@ -1,7 +1,7 @@
 # Zrandr
-A simple PyQt front end for xrandr.  
+A simple Qt5 front end for xrandr.
 
-Features include:  
+## Features:  
 * Setting screen resolution
 * Adding unrecognized resolutions
 * Rotating screen
@@ -14,11 +14,19 @@ Features include:
 ## Installation
 ### Archlinux
 ```
-yaourt zrandr
+$ yaourt -S zrandr
 ```
-### Other Distributions
-running 'install.sh' as root
+### Debian-based i386 Distributions
+* Install qt5-base and x11-xserver-utils packages.
+* Download the latest release .deb file and install.
+### Others
+* First make sure you have installed all dependencies.
+* For most deb-based distros (Debian, Ubuntu, Linux Mint), they are **qt5-base** and **x11-xserver-utils**.
+* And for rpm-baesed, they are **qt5-qtbase** and **xrandr** (or **xorg-x11-server-utils** in Fedora) or something else.
+* After all dependencies are ready, run the following commands.
 ```
+$ qmake zrandr.pro
+$ make
 # install.sh
 ```
 
