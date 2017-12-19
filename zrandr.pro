@@ -36,3 +36,5 @@ HEADERS += src/controller.h \
 
 RESOURCES += \
     resources.qrc
+
+CONFIG += C++11
