@@ -25,8 +25,6 @@ $ yaourt -S zrandr
 * And for rpm-baesed, they are **qt5-qtbase** and **xrandr** (or **xorg-x11-server-utils** in Fedora) or something else.
 * After all dependencies are ready, run the following commands.
 ```
-$ qmake zrandr.pro
-$ make
 # install.sh
 ```
 
