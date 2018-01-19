@@ -4,10 +4,11 @@
 int main(int argc, char *argv[])
 {
     QTranslator translator;
-    translator.load(QString("zrandr_") + QLocale::system().name());
+    bool res = translator.load(QString("zrandr_") + QLocale::system().name(), ":/i18n");
 
     QApplication a(argc, argv);
-    a.installTranslator(&translator);
+    if (res)
+        a.installTranslator(&translator);
     a.setStyleSheet("");
 
     MainWindow w;

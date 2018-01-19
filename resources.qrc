@@ -2,4 +2,7 @@
     <qresource prefix="/images">
         <file alias="icon">res/zrandr.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>i18n/zrandr_zh_CN.qm</file>
+    </qresource>
 </RCC>
