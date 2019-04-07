@@ -45,7 +45,7 @@ private:
     Resolution *minimum_resolution = nullptr;
     Resolution *maximum_resolution = nullptr;
     QVector<Monitor*> monitors;
-    const QStringList rot_list = {tr("Normal"), tr("Left"), tr("Right"), tr("Inverted")};
+    const QStringList rot_list = {tr("normal"), tr("left"), tr("right"), tr("inverted")};
 
 private:
     void initInfo();
