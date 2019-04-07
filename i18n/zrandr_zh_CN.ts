@@ -80,22 +80,22 @@
     </message>
     <message>
         <location filename="../src/controller.h" line="48"/>
-        <source>Normal</source>
+        <source>normal</source>
         <translation type="unfinished">正常</translation>
     </message>
     <message>
         <location filename="../src/controller.h" line="48"/>
-        <source>Left</source>
+        <source>left</source>
         <translation type="unfinished">向左</translation>
     </message>
     <message>
         <location filename="../src/controller.h" line="48"/>
-        <source>Right</source>
+        <source>right</source>
         <translation type="unfinished">向右</translation>
     </message>
     <message>
         <location filename="../src/controller.h" line="48"/>
-        <source>Inverted</source>
+        <source>inverted</source>
         <translation type="unfinished">反转</translation>
     </message>
 </context>
