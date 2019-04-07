@@ -100,7 +100,7 @@ void Controller::removeResolution()
 void Controller::rotate()
 {
     QString monitor = current_monitor->name();
-    QString rt = rotCb->currentText().toLower();
+    QString rt = rot_key_list.at(rotCb->currentIndex());
     QStringList arg;
     arg << "--output" << monitor << "--rotate" << rt;
     accessShell(arg);
@@ -212,7 +212,7 @@ void Controller::initView()
     QGridLayout *rotLayout = new QGridLayout(this);
                  rotCb     = new QComboBox(this);
     QPushButton *rot       = new QPushButton(tr("Rotate"), this);
-    rotCb->addItems(rot_list);
+    rotCb->addItems(rot_label_list);
     rot->setFixedWidth(100);
     rotLayout->addWidget(rotCb, 0, 0);
     rotLayout->addWidget(rot, 0, 2);
